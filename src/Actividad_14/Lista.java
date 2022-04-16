@@ -30,7 +30,7 @@ public class Lista {
 	
 		
 		while(bandera==false) {
-			System.out.println("\n\n Ejercicio 13 Colecciones y Diccionarios\n\n");
+			System.out.println("\n\n Ejercicio 14 Archivo CSV \n\n");
 			System.out.println(" Menu Principal: \n\n\n");
 			System.out.println("1.- Cargar Datos.");
 			System.out.println("2.- Mostrar Todos Los Datos.");
@@ -42,6 +42,7 @@ public class Lista {
 			System.out.println("8.- Ordenar los Registros.");
 			System.out.println("9.- Guadar Registros en Archivo CSV.");
 			System.out.println("10.- Salir del Menu.");
+			System.out.print("Introduzca su opcion:   ");
 			Scanner opcion=new Scanner(System.in);
 			int opcc=opcion.nextInt();
 			switch (opcc) {
@@ -82,6 +83,7 @@ public class Lista {
 				System.out.println("\n Guardar Registros en Archivo CSV");
 			   //guardarcsv();
 				crearArchivo();
+				mostrarcsv();
 		       break;	
 			case 10:
 				System.out.println("\n Salir del sistema");
@@ -177,12 +179,17 @@ public static void insertar() {
 		
 		// atributo 
 		Persona aux;
+		int xx=0;
+		
 		
 		// Registros de prueba
 		
 		aux = new Persona("Matias","Machin Casanas","79060996Z",45,"Calle El Canal",3,38911,"Santa cruz de tenerife");
 		lista.add(aux);                             // anadir registro a la lista
-									
+		xx=lista.size();
+		System.out.println("\n Registro  Insertado");
+		System.out.println("Nro de Registros: "+ lista.get(xx-1));
+		
 	}
 
 public static void contar() {
@@ -307,14 +314,32 @@ public static void ordenar() {
             }
 			fw.flush();
 			fw.close();
+			System.out.println("Archivo Generado Correctamente");
+			
 		} catch (IOException e) {
 			// Error al crear el archivo, por ejemplo, el archivo 
 			// está actualmente abierto.
 			e.printStackTrace();
 		}
+		
 	}
 	
-
+public static void mostrarcsv() {
+	File getCSVFiles = new File("archivonuevo.csv");
+    Scanner sc = null;
+	try {
+		sc = new Scanner(getCSVFiles);
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    sc.useDelimiter(",");
+    while (sc.hasNext())
+    {
+        System.out.print(sc.next()+",");
+    }
+    sc.close();  
+}
 
 
 
